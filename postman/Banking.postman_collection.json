@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "7334468e-8731-408a-9781-a1d2fd2494d4",
+		"name": "Banking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Accounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"accountId\", jsonData.data[0].accountNo);",
+									"postman.setEnvironmentVariable(\"toAccountId\", jsonData.data[2].accountNo);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts w/ ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/{{accountId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"id\": 99,\n        \"email\": \"created_user@test.com\"\n    },\n    \"type\": \"Wallet\",\n    \"balance\": 100,\n    \"accountDetails\": {\n        \"fullName\": \"Jane Doe\",\n        \"streetAddress\": \"123 street\",\n        \"address2\": \"\",\n        \"city\": \"dallas\",\n        \"state\": \"tx\",\n        \"postCode\": \"75201\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/delete/{{accountId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"delete",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 50.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/deposit/{{accountId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"deposit",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "WithDrawal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/withdrawal/{{accountId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"withdrawal",
+								"{{accountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/transfer/{{accountId}}/to/{{toAccountId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"transfer",
+								"{{accountId}}",
+								"to",
+								"{{toAccountId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"refundAccountId\", jsonData.data[0].accountNo);",
+									"postman.setEnvironmentVariable(\"transactionId\", jsonData.data[0].id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/banking/accounts/transactions/85497800-5021-4bd8-92b3-10f9dc1a80e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"accounts",
+								"transactions",
+								"85497800-5021-4bd8-92b3-10f9dc1a80e7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Refunds",
+			"item": [
+				{
+					"name": "Refund Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/refunds/approval/{{refundAccountId}}/refunds/{{transactionId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"refunds",
+								"approval",
+								"{{refundAccountId}}",
+								"refunds",
+								"{{transactionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/refunds/process/{{refundAccountId}}/refunds/{{transactionId}}/true",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"refunds",
+								"process",
+								"{{refundAccountId}}",
+								"refunds",
+								"{{transactionId}}",
+								"true"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deny",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/refunds/process/{{refundAccountId}}/refunds/{{transactionId}}/false",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"refunds",
+								"process",
+								"{{refundAccountId}}",
+								"refunds",
+								"{{transactionId}}",
+								"false"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"refundAccountIdForApproval\", jsonData.data[0].accountNo);",
+									"postman.setEnvironmentVariable(\"transactionIdForApproval\", jsonData.data[0].id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/banking/refunds",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"banking",
+								"refunds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/healthcheck",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"healthcheck"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

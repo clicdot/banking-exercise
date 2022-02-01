@@ -1,0 +1,1041 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/banking/accounts": {
+      "get": {
+        "operationId": "AccountsController_accounts",
+        "summary": "Get Accounts",
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountsResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/{accountId}": {
+      "get": {
+        "operationId": "AccountsController_accountsById",
+        "summary": "Get Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": false,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountsResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/create": {
+      "post": {
+        "operationId": "AccountsController_create",
+        "summary": "Create Accounts",
+        "parameters": [
+          
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Activity Logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/modify/{accountId}": {
+      "post": {
+        "operationId": "AccountsController_modify",
+        "summary": "Modify Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Activity Logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/delete/{accountId}": {
+      "delete": {
+        "operationId": "AccountsController_delete",
+        "summary": "Delete Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activity Logs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/deposit/{accountId}": {
+      "post": {
+        "operationId": "AccountsController_deposit",
+        "summary": "Deposit into Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "minLength": 1,
+                    "examples": [
+                      0,
+                      0,
+                      0.05,
+                      19.95,
+                      255.5,
+                      120000
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account Deposit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/withdrawal/{accountId}": {
+      "post": {
+        "operationId": "AccountsController_withdrawal",
+        "summary": "Withdraw from Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "minLength": 1,
+                    "examples": [
+                      0,
+                      0,
+                      0.05,
+                      19.95,
+                      255.5,
+                      120000
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account Withdrawal",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/transfer/{fromAccountId}/to/{toAccountId}": {
+      "post": {
+        "operationId": "AccountsController_transfer",
+        "summary": "Transfer to another Accounts",
+        "parameters": [
+          {
+            "name": "fromAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "toAccountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "minLength": 1,
+                    "examples": [
+                      0,
+                      0,
+                      0.05,
+                      19.95,
+                      255.5,
+                      120000
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account Transfer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/accounts/transactions/{accountId}": {
+      "post": {
+        "operationId": "AccountsController_transactions",
+        "summary": "Get Transactions for Accounts",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account Transactions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TransactionsResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Accounts"
+        ]
+      }
+    },
+    "/api/v1/banking/refunds/process/{accountId}/refunds/{refundsId}": {
+      "post": {
+        "operationId": "RefundsController_refundProcess",
+        "summary": "Process Refunds Requests",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refundsId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Refunds Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefundsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Refunds"
+        ]
+      }
+    },
+    "/api/v1/banking/refunds/approval/{accountId}/refunds/{refundsId}/{approval}": {
+      "post": {
+        "operationId": "RefundsController_refundApproval",
+        "summary": "Approve/Reject Refunds Requests",
+        "parameters": [
+          {
+            "name": "accountId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "refundsId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Refunds Request Approval",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefundsResponseDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Refunds"
+        ]
+      }
+    },
+    "/api/v1/banking/refunds": {
+      "get": {
+        "operationId": "RefundsController_refundsRequests",
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "Refunds Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RefundsResponseDto"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "tags": [
+          "Refunds"
+        ]
+      }
+    },
+    "/api/healthcheck": {
+      "get": {
+        "operationId": "HealthcheckController_check",
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "The Health Check is successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The Health Check is not successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "error"
+                    },
+                    "info": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "error": {
+                      "type": "object",
+                      "example": {
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      },
+                      "nullable": true
+                    },
+                    "details": {
+                      "type": "object",
+                      "example": {
+                        "database": {
+                          "status": "up"
+                        },
+                        "redis": {
+                          "status": "down",
+                          "message": "Could not connect"
+                        }
+                      },
+                      "additionalProperties": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Microservice - Health Check"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Swagger",
+    "description": "Swagger",
+    "version": "1.0.0",
+    "contact": {
+      
+    }
+  },
+  "tags": [
+    {
+      "name": "Swagger",
+      "description": ""
+    }
+  ],
+  "servers": [
+    
+  ],
+  "components": {
+    "schemas": {
+      "AuthUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ]
+      },
+      "AccountDetails": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string"
+          },
+          "streetAddress": {
+            "type": "string"
+          },
+          "address2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fullName",
+          "streetAddress",
+          "address2",
+          "city",
+          "state",
+          "postCode"
+        ]
+      },
+      "AccountsResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 20
+          },
+          "user": {
+            "$ref": "#/components/schemas/AuthUser"
+          },
+          "accountNo": {
+            "type": "string",
+            "format": "uuid",
+            "description": ""
+          },
+          "type": {
+            "type": "string",
+            "description": ""
+          },
+          "balance": {
+            "type": "number"
+          },
+          "accountDetails": {
+            "$ref": "#/components/schemas/AccountDetails"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "user",
+          "accountNo",
+          "type",
+          "balance",
+          "accountDetails",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "AccountsDto": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/AuthUser"
+          },
+          "type": {
+            "type": "string",
+            "description": ""
+          },
+          "balance": {
+            "type": "number"
+          },
+          "accountDetails": {
+            "$ref": "#/components/schemas/AccountDetails"
+          },
+          "test": {
+            "type": "boolean",
+            "description": "This field is not required and defaults to false",
+            "example": false
+          }
+        },
+        "required": [
+          "user",
+          "type",
+          "balance",
+          "accountDetails"
+        ]
+      },
+      "Actions": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ]
+      },
+      "TransactionDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "TransactionsResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 20
+          },
+          "accountNo": {
+            "type": "string",
+            "description": ""
+          },
+          "action": {
+            "description": "",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Actions"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "transactionDetails": {
+            "$ref": "#/components/schemas/TransactionDetails"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "accountNo",
+          "action",
+          "amount",
+          "transactionDetails",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "TransactionsDto": {
+        "type": "object",
+        "properties": {
+          "accountNo": {
+            "type": "string",
+            "description": ""
+          },
+          "action": {
+            "description": "",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Actions"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "transactionDetails": {
+            "$ref": "#/components/schemas/TransactionDetails"
+          },
+          "test": {
+            "type": "boolean",
+            "description": "This field is not required and defaults to false",
+            "example": false
+          }
+        },
+        "required": [
+          "accountNo",
+          "action",
+          "amount",
+          "transactionDetails"
+        ]
+      },
+      "RefundsResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 20
+          },
+          "accountNo": {
+            "type": "string",
+            "description": ""
+          },
+          "status": {
+            "type": "string",
+            "description": ""
+          },
+          "action": {
+            "description": "",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Actions"
+              }
+            ]
+          },
+          "amount": {
+            "type": "number"
+          },
+          "transactionDetails": {
+            "$ref": "#/components/schemas/TransactionDetails"
+          },
+          "createdAt": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "accountNo",
+          "status",
+          "action",
+          "amount",
+          "transactionDetails",
+          "createdAt",
+          "updatedAt"
+        ]
+      }
+    }
+  }
+}

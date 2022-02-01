@@ -1,0 +1,92 @@
+## Docker Compose requires an .env file
+## .env for security reasons is not part of the repo
+## .env will be dynamically created on CI/CD process
+# dFile='Dockerfile'
+# appName='someapp'
+# PORT_MAPPED=5000
+# PORT_TARGET=5001
+# ENV=DEV|UAT|PROD
+# REDIS_PORT=6379
+#
+
+services:
+  db:
+    container_name: ${appName}_mongo
+    image: mongo
+    command: mongod --port ${MONGO_PORT}
+    ports:
+      - ${MONGO_MAPPORT}:${MONGO_PORT}
+    # volumes:
+    #   - "./docker/mongodb/data:/data/db"
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+    #   MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS}
+    restart: always
+    networks:
+      - default
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '5432:5432'
+
+  # cache:
+  #   container_name: ${appName}_redis
+  #   image: redis:alpine
+  #   command: redis-server /usr/local/etc/redis/redis.conf
+  #   volumes:
+  #     - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+  #   networks:
+  #     - default
+  #   ports:
+  #     - 6379:6379
+
+  api:
+    container_name: ${appName}_api
+    build:
+      context: .
+      dockerfile: ./docker/${dFile}
+    volumes:
+      - "./src:/app/src"
+    expose:
+      - 3000
+      - 8080
+    ports:
+      - "${PORT_MAPPED}:${PORT_TARGET}"
+      - 9229:9229
+    environment:
+      DEBUG: ${DEBUG}
+      PORT_MAPPED: ${PORT_MAPPED}
+      PORT_TARGET: ${PORT_TARGET}
+      SWAGGER_TITLE: "Swagger"
+      SWAGGER_DESCR: "Swagger"
+      SWAGGER_VS: "1.0.0"
+      MONGOOSEHOST: db
+      MONGOOSEPORT: ${MONGO_PORT}
+      MONGOOSEUSER: ${MONGO_USER}
+      MONGOOSEPASS: ${MONGO_PASS}
+      MONGOOSEDB: ${MONGO_DB}
+      MONGOOSETLSCERT: ${MONGOOSETLSCERT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      MODE: ${NODE_ENV}
+      RUN_MIGRATIONS: "true"
+      ENV: ${ENV}
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - default
+networks:
+  default:
+    name: ${appName}_orchestrator
+    driver: bridge
+version: '3.5'
